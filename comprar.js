@@ -51,3 +51,4 @@ window.comprar = async function(qtd) {
 
 
 
+
