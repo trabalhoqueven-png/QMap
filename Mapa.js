@@ -10,9 +10,9 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDxY7bW7ywWgxPRfosKNSl8_2gyzGRQ3eY",
-  authDomain: "clickmap-ae0ca.firebaseapp.com",
-  projectId: "clickmap-ae0ca"
+  apiKey: "AIzaSyAT37Au3gOEqT2KzG9eaxE41X_U4mZez4o",
+  authDomain: "qmap-981c5.firebaseapp.com",
+  projectId: "qmap-981c5"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -30,3 +30,4 @@ onAuthStateChanged(auth, async user => {
   document.getElementById("saldo").innerText =
     snap.data().credits + " créditos";
 });
+
