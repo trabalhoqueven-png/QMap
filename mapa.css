@@ -1,0 +1,18 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.top-bar {
+  background: #111;
+  color: #fff;
+  padding: 10px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+#map {
+  height: calc(100vh - 50px);
+  width: 100%;
+}
