@@ -1,53 +1,40 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Mapa - Queven Casino</title>
+  <title>Plataforma de Rastreamento</title>
 
-  <!-- Leaflet CSS -->
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-  />
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
-  <link rel="stylesheet" href="Mapa.css">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header class="top-bar">
-  <a href="index.html">⬅ Voltar</a>
-  <span>Mapa Interativo</span>
-</header>
+<div class="container">
 
-<div id="map"></div>
-<!-- Mapa tempo Real Frontend-->
-<script>
-const map = L.map('map').setView([-23.55, -46.63], 15);
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <h2>🚗 Rastreamento</h2>
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
-  .addTo(map);
+    <div class="device online">
+      <span></span> Veículo 01
+    </div>
 
-const marker = L.marker([-23.55, -46.63]).addTo(map);
+    <div class="device offline">
+      <span></span> Veículo 02
+    </div>
 
-firebase.firestore()
-  .collection("localizacoes")
-  .doc("35958701XXXXXX")
-  .onSnapshot(doc => {
-    if (!doc.exists) return;
+  </aside>
 
-    const { lat, lng } = doc.data();
-    marker.setLatLng([lat, lng]);
-    map.setView([lat, lng]);
-  });
-</script>
-  
-<!-- Leaflet JS -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- MAPA -->
+  <main class="map-area">
+    <div id="map"></div>
+  </main>
 
-<!-- Teu JS -->
-<script src="Mapa.js"></script>
+</div>
 
+<script src="script.js"></script>
 </body>
 </html>
