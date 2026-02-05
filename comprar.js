@@ -10,10 +10,10 @@ import {
   onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-const firebaseConfig = { 
-  apiKey: "AIzaSyDxY7bW7ywWgxPRfosKNSl8_2gyzGRQ3eY",
-  authDomain: "clickmap-ae0ca.firebaseapp.com",
-  projectId: "clickmap-ae0ca"
+const firebaseConfig = {
+  apiKey: "AIzaSyAT37Au3gOEqT2KzG9eaxE41X_U4mZez4o",
+  authDomain: "qmap-981c5.firebaseapp.com",
+  projectId: "qmap-981c5"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -42,6 +42,7 @@ window.comprar = async function(qtd) {
   document.getElementById("msg").innerText =
     "📲 Faça o pagamento via PIX. Após pagar, seus créditos serão liberados.";
 };
+
 
 
 
