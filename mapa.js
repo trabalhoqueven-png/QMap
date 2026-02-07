@@ -1,32 +1,38 @@
 import { auth, db } from "./firebase.js";
 import {
+  collection,
   doc,
   setDoc,
-  collection,
   query,
   where,
   onSnapshot,
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-// 🔒 GARANTIR USUÁRIO LOGADO
-let usuarioAtual = null;
-li.onclick = () => ouvirLocalizacao(docSnap.id);
+import {
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-auth.onAuthStateChanged(user => {
-  if (!user) {
-    location.href = "index.html";
-    return;
-  }
-  usuarioAtual = user;
-  iniciarMapa();
-  listarVeiculos();
-});
+// 🔒 USUÁRIO
+let usuarioAtual = null;
 
 // 🗺️ MAPA
 let map;
 let markers = {};
 
+// 🔐 VERIFICAR LOGIN
+onAuthStateChanged(auth, user => {
+  if (!user) {
+    location.href = "index.html";
+    return;
+  }
+
+  usuarioAtual = user;
+  iniciarMapa();
+  listarVeiculos();
+});
+
+// 🗺️ INICIAR MAPA
 function iniciarMapa() {
   map = L.map("map").setView([-23.55, -46.63], 13);
 
@@ -55,23 +61,17 @@ btnSalvar.onclick = async () => {
     return;
   }
 
-  try {
-    await setDoc(doc(db, "dispositivos", imei), {
-      uid: usuarioAtual.uid,
-      nome,
-      placa,
-      criadoEm: serverTimestamp()
-    });
+  await setDoc(doc(db, "dispositivos", imei), {
+    uid: usuarioAtual.uid,
+    nome,
+    placa,
+    criadoEm: serverTimestamp()
+  });
 
-    modal.classList.add("hidden");
-    document.getElementById("imei").value = "";
-    document.getElementById("nome").value = "";
-    document.getElementById("placa").value = "";
-
-  } catch (e) {
-    alert("Erro ao salvar dispositivo");
-    console.error(e);
-  }
+  modal.classList.add("hidden");
+  document.getElementById("imei").value = "";
+  document.getElementById("nome").value = "";
+  document.getElementById("placa").value = "";
 };
 
 // 🚗 LISTAR VEÍCULOS
@@ -90,12 +90,17 @@ function listarVeiculos() {
       const d = docSnap.data();
 
       const li = document.createElement("li");
-      li.innerText = `${d.nome} (${d.placa || "sem placa"})`;
+      li.textContent = `${d.nome} (${d.placa || "sem placa"})`;
+
+      // ✅ AGORA SIM
+      li.onclick = () => ouvirLocalizacao(docSnap.id);
 
       lista.appendChild(li);
     });
   });
 }
+
+// 📡 OUVIR LOCALIZAÇÃO EM TEMPO REAL
 function ouvirLocalizacao(imei) {
   const ref = doc(db, "localizacoes", imei);
 
