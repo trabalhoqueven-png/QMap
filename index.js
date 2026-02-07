@@ -30,7 +30,7 @@ function msg(texto, cor) {
 }
 
 // 🔐 LOGIN
-window.login = async () => {
+async function login() {
   try {
     const cred = await signInWithEmailAndPassword(
       auth,
@@ -44,18 +44,14 @@ window.login = async () => {
       return;
     }
 
-    document.body.classList.add("saindo");
-    setTimeout(() => {
-      location.href = "map.html";
-    }, 500);
+    location.href = "mapa.html";
 
-  } catch {
+  } catch (e) {
     msg("❌ Email ou senha inválidos.", "red");
   }
-};
+}
 
-// 🆕 CADASTRO
-window.cadastrar = async () => {
+async function cadastrar() {
   try {
     const cred = await createUserWithEmailAndPassword(
       auth,
@@ -63,28 +59,21 @@ window.cadastrar = async () => {
       senha.value
     );
 
-    // 📧 VERIFICAÇÃO
     await sendEmailVerification(cred.user);
 
-    // 💾 FIRESTORE
     await setDoc(doc(db, "usuarios", cred.user.uid), {
       email: cred.user.email,
-      credito: 1,
       criadoEm: serverTimestamp()
     });
 
-    // 🚪 DESLOGA (IMPEDIR AUTO LOGIN)
     await signOut(auth);
 
-    msg(
-      "📧 Cadastro criado! Verifique seu email /SPAM para entrar.",
-      "lime"
-    );
+    msg("📧 Cadastro criado! Verifique seu email.", "lime");
 
   } catch (e) {
     msg(e.message, "red");
   }
-};
+}
 
 // 🚧 BLOQUEAR USUÁRIO LOGADO NO INDEX
 onAuthStateChanged(auth, user => {
