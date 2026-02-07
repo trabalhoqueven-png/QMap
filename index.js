@@ -1,4 +1,5 @@
 import { auth, db } from "./firebase.js";
+
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
@@ -6,25 +7,23 @@ import {
   onAuthStateChanged,
   signOut
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
 import {
   doc,
   setDoc,
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-// 🔥 CONFIG FIREBASE
-document.getElementById("btnLogin").addEventListener("click", login);
-document.getElementById("btnCadastro").addEventListener("click", cadastrar);
-
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-
 // 🔹 ELEMENTOS
 const email = document.getElementById("email");
 const senha = document.getElementById("senha");
 const msgEl = document.getElementById("msg");
+const btnLogin = document.getElementById("btnLogin");
+const btnCadastro = document.getElementById("btnCadastro");
+
+// 🔹 EVENTOS
+btnLogin.addEventListener("click", login);
+btnCadastro.addEventListener("click", cadastrar);
 
 // 🔹 FUNÇÃO DE MENSAGEM
 function msg(texto, cor) {
@@ -54,6 +53,7 @@ async function login() {
   }
 }
 
+// 🆕 CADASTRO
 async function cadastrar() {
   try {
     const cred = await createUserWithEmailAndPassword(
@@ -78,9 +78,9 @@ async function cadastrar() {
   }
 }
 
-// 🚧 BLOQUEAR USUÁRIO LOGADO NO INDEX
+// 🚧 BLOQUEAR USUÁRIO LOGADO
 onAuthStateChanged(auth, user => {
   if (user && user.emailVerified) {
-    location.href = "map.html";
+    location.href = "mapa.html";
   }
 });
