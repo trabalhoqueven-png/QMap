@@ -13,6 +13,9 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 // 🔥 CONFIG FIREBASE
+document.getElementById("btnLogin").addEventListener("click", login);
+document.getElementById("btnCadastro").addEventListener("click", cadastrar);
+
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
