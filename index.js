@@ -46,7 +46,7 @@ async function login() {
       return;
     }
 
-    location.href = "mapa.html";
+    location.href = "map.html";
 
   } catch (e) {
     msg("❌ Email ou senha inválidos.", "red");
@@ -71,7 +71,7 @@ async function cadastrar() {
 
     await signOut(auth);
 
-    msg("📧 Cadastro criado! Verifique seu email.", "lime");
+    msg("📧 Cadastro criado! Verifique seu SPAM / GMAIL.", "lime");
 
   } catch (e) {
     msg(e.message, "red");
