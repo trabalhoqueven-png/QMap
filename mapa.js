@@ -25,11 +25,3 @@ function iniciarMapa(uid) {
 
   // Aqui entra rastreamento em tempo real
 }
-
-onSnapshot(doc(db, "localizacoes", imei), (docSnap) => {
-  if (docSnap.exists()) {
-    const { lat, lng } = docSnap.data();
-    marker.setLatLng([lat, lng]);
-    map.setView([lat, lng]);
-  }
-});
