@@ -11,6 +11,7 @@ import {
 
 // 🔒 GARANTIR USUÁRIO LOGADO
 let usuarioAtual = null;
+li.onclick = () => ouvirLocalizacao(docSnap.id);
 
 auth.onAuthStateChanged(user => {
   if (!user) {
@@ -24,6 +25,7 @@ auth.onAuthStateChanged(user => {
 
 // 🗺️ MAPA
 let map;
+let markers = {};
 
 function iniciarMapa() {
   map = L.map("map").setView([-23.55, -46.63], 13);
@@ -92,5 +94,22 @@ function listarVeiculos() {
 
       lista.appendChild(li);
     });
+  });
+}
+function ouvirLocalizacao(imei) {
+  const ref = doc(db, "localizacoes", imei);
+
+  onSnapshot(ref, snap => {
+    if (!snap.exists()) return;
+
+    const { lat, lng } = snap.data();
+
+    if (!markers[imei]) {
+      markers[imei] = L.marker([lat, lng]).addTo(map);
+    } else {
+      markers[imei].setLatLng([lat, lng]);
+    }
+
+    map.setView([lat, lng], 15);
   });
 }
