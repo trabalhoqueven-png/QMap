@@ -39,3 +39,56 @@ body {
 #map {
   flex: 1;
 }
+
+.btn-add {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  background: #22c55e;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: #020617;
+  padding: 20px;
+  width: 280px;
+  border-radius: 10px;
+}
+
+.modal-content h3 {
+  margin-bottom: 10px;
+  color: #22c55e;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  border: none;
+}
+
+.modal-content button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 6px;
+  cursor: pointer;
+}
