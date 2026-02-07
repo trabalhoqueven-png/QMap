@@ -46,7 +46,7 @@ async function login() {
       return;
     }
 
-    location.href = "map.html";
+    location.href = "mapa.html";
 
   } catch (e) {
     msg("❌ Email ou senha inválidos.", "red");
@@ -81,6 +81,6 @@ async function cadastrar() {
 // 🚧 BLOQUEAR USUÁRIO LOGADO
 onAuthStateChanged(auth, user => {
   if (user && user.emailVerified) {
-    location.href = "map.html";
+    location.href = "mapa.html";
   }
 });
