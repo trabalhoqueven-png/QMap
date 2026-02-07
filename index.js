@@ -15,11 +15,6 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 // 🔥 CONFIG FIREBASE
-const firebaseConfig = {
-  apiKey: "AIzaSyAT37Au3gOEqT2KzG9eaxE41X_U4mZez4o",
-  authDomain: "qmap-981c5.firebaseapp.com",
-  projectId: "qmap-981c5"
-};
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
