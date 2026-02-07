@@ -81,6 +81,6 @@ async function cadastrar() {
 // 🚧 BLOQUEAR USUÁRIO LOGADO
 onAuthStateChanged(auth, user => {
   if (user && user.emailVerified) {
-    location.href = "mapa.html";
+    location.href = "map.html";
   }
 });
